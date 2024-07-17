@@ -1,5 +1,6 @@
-const App = () => {
+import { useState } from "react";
 
+const App = () => {
   return (
     <>
       <p>hola</p>
