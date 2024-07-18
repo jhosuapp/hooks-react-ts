@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
+import { Message } from './Message';
 
 type form = {
     username: string,
@@ -18,12 +19,23 @@ const SimpleForm = ():JSX.Element => {
 
     const HandleOnChange:ChangeEventHandler<HTMLInputElement> = ({ target })=>{
         const { name, value } = target;
-        console.log(name, value);
         setForm({
             ...form,
             [name]: value
         });
     }
+
+    useEffect(()=>{
+        // console.log('effect init');
+    }, []);
+
+    useEffect(()=>{
+        // console.log('effect init or change form state');
+    }, [form]);
+
+    useEffect(()=>{
+        // console.log('effect init or email form');
+    }, [email]);
 
     return (
         <>
@@ -47,6 +59,10 @@ const SimpleForm = ():JSX.Element => {
                 value={ email }
                 onChange={ HandleOnChange }
             />
+
+            {
+                username == 'Jhosua2' && <Message />
+            }
         </>
     )
 }
