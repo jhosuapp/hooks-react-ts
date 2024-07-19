@@ -1,11 +1,8 @@
-// import { useEffect, useState } from 'react';
-// import type { ChangeEventHandler } from 'react';
-import { Message } from './Message';
 import { useForm } from '../hooks';
 
 const SimpleFormWithHook = ():JSX.Element => {
 
-    const { form, HandleOnChange } = useForm({
+    const { form, HandleOnChange, HandleOnReset } = useForm({
         username: '',
         email: '',
         password: ''
@@ -45,9 +42,8 @@ const SimpleFormWithHook = ():JSX.Element => {
                 onChange={ HandleOnChange }
             />
 
-            {
-                username == 'Jhosua2' && <Message />
-            }
+            <button onClick={ HandleOnReset }  className='btn btn-primary mt-2'>Reset</button>
+
         </>
     )
 }

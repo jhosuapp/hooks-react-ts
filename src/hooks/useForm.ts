@@ -10,12 +10,13 @@ type Iform = {
 
 type IUseForm = {
     HandleOnChange: ChangeEventHandler<HTMLInputElement>;
-    form: Iform
+    HandleOnReset: () => void;
+    form: Iform;
 }
 
 const useForm = ( initialForm: Iform ):IUseForm=>{
     const [form, setForm] = useState<Iform>( initialForm );
-
+    //Save values form
     const HandleOnChange:ChangeEventHandler<HTMLInputElement> = ({ target })=>{
         const { name, value } = target;
         setForm({
@@ -23,11 +24,17 @@ const useForm = ( initialForm: Iform ):IUseForm=>{
             [name]: value
         });
     }
-
-
+    //Reset form
+    const HandleOnReset = ()=>{
+        setForm({
+            ...initialForm
+        });
+    }
+    //Return public methods
     return {
         HandleOnChange,
         form,
+        HandleOnReset
     }
 }
 
