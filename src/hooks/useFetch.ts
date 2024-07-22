@@ -1,32 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type useFetchError = {
     code: number,
     message: string
 }
 
-type useFetchState = {
-    data: {} | null,
+type useFetchState<T> = {
+    data: T | null,
     hasError: boolean,
     isLoading: boolean,
     error: useFetchError
 }
 
-const useFetch = (url: string): useFetchState =>{
-    const [responseData, setResponseData] = useState<useFetchState>({
-        data: {},
+const useFetch = <T>(url: string): useFetchState<T> =>{
+    const [responseData, setResponseData] = useState<useFetchState<T>>({
+        data: null,
         hasError: false,
         isLoading: true,
         error: {} as useFetchError,
     });
+    //Mount 
+    const isMounted = useRef(true);
     //Request when url change
     useEffect(()=>{
+        isMounted.current = true;
         getPokemons();
+        return () => {
+            isMounted.current = false;
+        }
     },[url]);
     //Set loading
     const setLoading = () =>{
         setResponseData({
-            data: {},
+            data: null,
             hasError:false,
             isLoading: true,
             error: {} as useFetchError
@@ -42,7 +48,7 @@ const useFetch = (url: string): useFetchState =>{
         await new Promise(resolve => setTimeout(resolve, 1500));
         //Validate if request it's ok
         if( !resp.ok ){
-            setResponseData({
+            isMounted.current && setResponseData({
                 data: null,
                 isLoading: false,
                 hasError: true,
@@ -55,7 +61,7 @@ const useFetch = (url: string): useFetchState =>{
         }
         //Set data
         const data = await resp.json();
-        setResponseData({
+        isMounted.current && setResponseData({
             data: data,
             hasError: false,
             isLoading: false,

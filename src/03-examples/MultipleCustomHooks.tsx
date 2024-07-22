@@ -1,8 +1,12 @@
-import { useFetch } from "../hooks"
+import { useFetch } from "../hooks";
+
+interface Pokemon {
+    name: string
+}
 
 const MultipleCustomHooks = ():JSX.Element => {
 
-    const { data, isLoading } = useFetch('https://pokeapi.co/api/v2/pokemon/ditto');
+    const { data, isLoading } = useFetch<Pokemon>('https://pokeapi.co/api/v2/pokemon/ditto');
 
     return (
         <>
@@ -13,7 +17,7 @@ const MultipleCustomHooks = ():JSX.Element => {
             {isLoading && <p>Cargando...</p>}
 
             <pre>
-                { JSON.stringify( data ) }
+                { JSON.stringify( data?.name ) }
             </pre>
 
         </>
