@@ -1,4 +1,4 @@
-import { useForm } from '../hooks';
+import { useForm, useFetch } from '../hooks';
 
 const SimpleFormWithHook = ():JSX.Element => {
 
@@ -7,6 +7,10 @@ const SimpleFormWithHook = ():JSX.Element => {
         email: '',
         password: ''
     });
+
+    const { responseData } = useFetch('https://pokeapi.co/api/v2/');
+
+    console.log(responseData);
 
     const { username, email, password } = form;
 
