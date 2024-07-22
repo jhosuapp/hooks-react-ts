@@ -1,32 +1,74 @@
 import { useEffect, useState } from "react";
 
-const getPokemons = async (url: string) =>{
-    const request = await fetch(url);
-    const response = await request.json();
-    return response;
+type useFetchError = {
+    code: number,
+    message: string
 }
 
+type useFetchState = {
+    data: {} | null,
+    hasError: boolean,
+    isLoading: boolean,
+    error: useFetchError
+}
 
-const useFetch = (url: string)=>{
-    const [responseData, setResponseData] = useState<{}>({});
-
+const useFetch = (url: string): useFetchState =>{
+    const [responseData, setResponseData] = useState<useFetchState>({
+        data: {},
+        hasError: false,
+        isLoading: true,
+        error: {} as useFetchError,
+    });
+    //Request when url change
     useEffect(()=>{
-        try{
-            getPokemons(url)
-                .then((data)=>{
-                    setResponseData(data);
-                }).catch((error)=>{
-                    console.log(error + 'promise');
-                });
-        }catch(error){
-            console.log(error + 'try');
+        getPokemons();
+    },[url]);
+    //Set loading
+    const setLoading = () =>{
+        setResponseData({
+            data: {},
+            hasError:false,
+            isLoading: true,
+            error: {} as useFetchError
+        })
+    }
+    //Async request
+    const getPokemons = async () =>{
+
+        setLoading();
+
+        const resp = await fetch(url);
+        //Sleep
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        //Validate if request it's ok
+        if( !resp.ok ){
+            setResponseData({
+                data: null,
+                isLoading: false,
+                hasError: true,
+                error: {
+                    code: resp.status,
+                    message: resp.statusText
+                }
+            });
+            return;
         }
-    },[]);
+        //Set data
+        const data = await resp.json();
+        setResponseData({
+            data: data,
+            hasError: false,
+            isLoading: false,
+            error: {} as useFetchError,
+        });
+    }    
 
     return {
-        responseData
+        data: responseData.data,
+        hasError: responseData.hasError,
+        isLoading: responseData.isLoading,
+        error: responseData.error
     }
-
 }
 
 export { useFetch }
