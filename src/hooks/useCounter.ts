@@ -19,9 +19,8 @@ const useCounter = (initialValue:number):TypesCounter=>{
         setCounter(counter - value);
     }
     const reset = ()=>{
-        setCounter(10);
+        setCounter(initialValue);
     }
-
 
     return {
         counter,

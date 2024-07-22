@@ -38,7 +38,7 @@ const SimpleForm = ():JSX.Element => {
     }, [email]);
 
     return (
-        <>
+        <section className="container mt-5">
             <h1>Formulario simple</h1>
             <hr />
 
@@ -63,7 +63,7 @@ const SimpleForm = ():JSX.Element => {
             {
                 username == 'Jhosua2' && <Message />
             }
-        </>
+        </section>
     )
 }
 

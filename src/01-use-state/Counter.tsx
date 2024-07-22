@@ -25,7 +25,7 @@ const Counter = ():JSX.Element => {
 
 
     return (
-        <>
+        <section className="container mt-5">
             <h1>Counter: { counter1 }</h1>
             <h1>Counter: { counter2 }</h1>
             <h1>Counter: { counter3 }</h1>
@@ -33,7 +33,7 @@ const Counter = ():JSX.Element => {
             <hr />
 
             <button className="btn" onClick={ handleClick }>+1</button>
-        </>
+        </section>
     )
 }
 

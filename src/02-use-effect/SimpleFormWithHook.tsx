@@ -11,7 +11,7 @@ const SimpleFormWithHook = ():JSX.Element => {
     const { username, email, password } = form;
 
     return (
-        <>
+        <section className="container mt-5">
             <h1>Formulario simple</h1>
             <hr />
 
@@ -44,7 +44,7 @@ const SimpleFormWithHook = ():JSX.Element => {
 
             <button onClick={ HandleOnReset }  className='btn btn-primary mt-2'>Reset</button>
 
-        </>
+        </section>
     )
 }
 
