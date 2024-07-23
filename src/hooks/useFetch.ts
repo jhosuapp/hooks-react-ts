@@ -12,6 +12,8 @@ type useFetchState<T> = {
     error: useFetchError
 }
 
+const localCache: { [key: string]: { [key: string]: string | number | string[] | number[] | {} } } = {};
+
 const useFetch = <T>(url: string): useFetchState<T> =>{
     const [responseData, setResponseData] = useState<useFetchState<T>>({
         data: null,
@@ -19,6 +21,7 @@ const useFetch = <T>(url: string): useFetchState<T> =>{
         isLoading: true,
         error: {} as useFetchError,
     });
+    console.log(localCache);
     //Mount 
     const isMounted = useRef(true);
     //Request when url change
@@ -40,9 +43,19 @@ const useFetch = <T>(url: string): useFetchState<T> =>{
     }
     //Async request
     const getPokemons = async () =>{
-
+        //Verify cache
+        if( localCache[url] ){
+            setResponseData({
+                data: localCache[url] as T,
+                hasError:false,
+                isLoading: false,
+                error: {} as useFetchError
+            });
+            return;
+        }
+        //Loading
         setLoading();
-
+        //Get data
         const resp = await fetch(url);
         //Sleep
         await new Promise(resolve => setTimeout(resolve, 1500));
@@ -67,6 +80,8 @@ const useFetch = <T>(url: string): useFetchState<T> =>{
             isLoading: false,
             error: {} as useFetchError,
         });
+        //Save cache
+        localCache[url] = data;
     }    
 
     return {
