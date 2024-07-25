@@ -5,10 +5,11 @@ import ReactDOM from 'react-dom/client';
 // import { CounterWithHook } from './01-use-state/CounterWithHook';
 // import { SimpleForm } from './02-use-effect/SimpleForm';
 // import { SimpleFormWithHook } from './02-use-effect/SimpleFormWithHook';
-import { MultipleCustomHooks } from './03-examples/MultipleCustomHooks';
+// import { MultipleCustomHooks } from './03-examples/MultipleCustomHooks';
+import { FocusScreen } from './04-use-ref/FocusScreen';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
-    <MultipleCustomHooks />
+    <FocusScreen />
   // </React.StrictMode>,
 )
