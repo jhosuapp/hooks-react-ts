@@ -10,11 +10,12 @@ import ReactDOM from 'react-dom/client';
 // import { Layout } from './05-use-layout-effect/Layout';
 // import { Memorize } from './06-memos/Memorize';
 // import { MemoHook } from './07-use-memo/MemoHook';
-import { CallbackHook } from './08-use-callback/CallbackHook';
+// import { CallbackHook } from './08-use-callback/CallbackHook';
+import { Parent } from './09-work-memo/Parent';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
-    <CallbackHook />
+    <Parent />
   // </React.StrictMode>,
 )
