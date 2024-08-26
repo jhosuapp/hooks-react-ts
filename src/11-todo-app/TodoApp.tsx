@@ -1,26 +1,24 @@
-import { useReducer } from "react"
+import { useEffect, useReducer } from "react"
 import { IinitialTodos, IinitialTodo, IActionTodoReducer } from './models/index';
 import { todoReducer } from "./reducers/index";
 import { TodoList, TodoAdd } from './components/index';
 
 
+const init = ()=> {
+    const storedTodo = localStorage.getItem('Todo');
+    return storedTodo ? JSON.parse(storedTodo) : [];
+}
+
 const TodoApp = ():JSX.Element => {
 
-    const initialTodos:IinitialTodos = [
-        {
-            id: 1,
-            title: 'Learn react',
-            complete: false,
-        },
-        {
-            id: 2,
-            title: 'Learn framer motion',
-            complete: false,
-        },
-    ]
+    const initialTodos:IinitialTodos = [];
 
-    const [ state, dispatch ] = useReducer(todoReducer, initialTodos);
-
+    const [ state, dispatch ] = useReducer(todoReducer, initialTodos, init);
+    //Save in local storage
+    useEffect(()=>{
+        localStorage.setItem('Todo', JSON.stringify(state));
+    }, [ state ]);
+    //update state
     const handleTodo = (Todo:IinitialTodo) =>{
         const action:IActionTodoReducer = {
             type: '[TODO] Add todo',
