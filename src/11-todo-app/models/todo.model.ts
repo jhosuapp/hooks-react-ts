@@ -8,5 +8,5 @@ export type IinitialTodos = IinitialTodo[];
 
 export type IActionTodoReducer = {
     payload: IinitialTodo,
-    type: string
+    type: '[TODO] Add todo'
 }
