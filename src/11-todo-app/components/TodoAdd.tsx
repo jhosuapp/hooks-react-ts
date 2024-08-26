@@ -1,6 +1,11 @@
 import { useRef, useState } from "react";
+import { IinitialTodo } from '../models/index';
 
-const TodoAdd = ():JSX.Element => {
+type Props = {
+    handleTodo: (todo:IinitialTodo) => void
+}
+
+const TodoAdd = ( { handleTodo }:Props ):JSX.Element => {
 
     const nodeInput = useRef<HTMLInputElement>(null);
     const [error, setError] = useState<boolean>(false);
@@ -12,7 +17,7 @@ const TodoAdd = ():JSX.Element => {
             const value = nodeInput.current.value;
             if(value.length > 0){
                 setError(false);
-                console.log({
+                handleTodo({
                     id: 3,
                     title: value,
                     complete: false,

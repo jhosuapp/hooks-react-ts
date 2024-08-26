@@ -1,5 +1,5 @@
 import { useReducer } from "react"
-import { IinitialTodos } from './models/index';
+import { IinitialTodos, IinitialTodo } from './models/index';
 import { todoReducer } from "./reducers/index";
 import { TodoList, TodoAdd } from './components/index';
 
@@ -21,6 +21,10 @@ const TodoApp = ():JSX.Element => {
 
     const [ state, dispatch ] = useReducer(todoReducer, initialTodos);
 
+    const handleTodo = (Todo:IinitialTodo) =>{
+        console.log(Todo);
+    }
+
     return (
         <section className="container mt-5">
             <h1>Todo app</h1>
@@ -34,7 +38,7 @@ const TodoApp = ():JSX.Element => {
                 <div className="col-5">
                     <h4>add Todo</h4>
                     <hr />
-                    <TodoAdd />
+                    <TodoAdd handleTodo={ handleTodo } />
                 </div>
             </div>
         </section>
