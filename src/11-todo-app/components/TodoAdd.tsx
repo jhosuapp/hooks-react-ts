@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { IinitialTodo } from '../models/index';
+import { dinamicId } from '../helpers/index';
 
 type Props = {
     handleTodo: (todo:IinitialTodo) => void
@@ -18,7 +19,7 @@ const TodoAdd = ( { handleTodo }:Props ):JSX.Element => {
             if(value.length > 0){
                 setError(false);
                 handleTodo({
-                    id: 3,
+                    id: dinamicId(),
                     title: value,
                     complete: false,
                 });

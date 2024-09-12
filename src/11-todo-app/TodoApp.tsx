@@ -26,6 +26,14 @@ const TodoApp = ():JSX.Element => {
         }
         dispatch(action);
     }
+    //Delete todo
+    const handleTodoDelete = (Todo:IinitialTodo) =>{
+        const action:IActionTodoReducer = {
+            type: '[TODO] Delete todo',
+            payload: Todo
+        }
+        dispatch(action);
+    }
 
     return (
         <section className="container mt-5">
@@ -35,7 +43,7 @@ const TodoApp = ():JSX.Element => {
 
             <div className="row">
                 <div className="col-7">
-                    <TodoList state={ state } />
+                    <TodoList state={ state } handleTodoDelete={ handleTodoDelete } />
                 </div>
                 <div className="col-5">
                     <h4>add Todo</h4>

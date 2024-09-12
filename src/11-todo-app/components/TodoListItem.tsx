@@ -1,17 +1,22 @@
 import { IinitialTodo } from '../models/index';
 
 type IpropsTodoListItem = {
-    todo: IinitialTodo
+    todo: IinitialTodo,
+    handleTodoDelete: (Todo: IinitialTodo) => void
 }
 
-const TodoListItem = ({ todo }:IpropsTodoListItem ):JSX.Element => {
-    console.log(todo);
+const TodoListItem = ({ todo, handleTodoDelete }:IpropsTodoListItem ):JSX.Element => {
+
+    const handleDelete = ()=>{
+        handleTodoDelete(todo);
+    }
+
     return (
         <li className="list-group-item d-flex justify-content-between align-items-center pt-2 mt-2">
             <span>
                 { todo.title }
             </span>
-            <button className="btn btn-danger">delete</button>
+            <button className="btn btn-danger" onClick={ handleDelete }>delete</button>
         </li>
     )
 }
