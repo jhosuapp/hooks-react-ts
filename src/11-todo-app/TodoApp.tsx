@@ -30,7 +30,7 @@ const TodoApp = ():JSX.Element => {
     const handleTodoDelete = (Todo:IinitialTodo) =>{
         const action:IActionTodoReducer = {
             type: '[TODO] Delete todo',
-            payload: Todo 
+            payload: Todo  
         }
         dispatch(action);
     }
