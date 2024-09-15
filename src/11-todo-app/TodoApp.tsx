@@ -34,6 +34,14 @@ const TodoApp = ():JSX.Element => {
         }
         dispatch(action);
     }
+    //Check and uncheck todo
+    const handleTodoToggle = (Todo:IinitialTodo) =>{
+        const action:IActionTodoReducer = {
+            type: '[TODO] Toggle todo',
+            payload: Todo  
+        }
+        dispatch(action);
+    }
 
     return (
         <section className="container mt-5">
@@ -43,7 +51,11 @@ const TodoApp = ():JSX.Element => {
 
             <div className="row">
                 <div className="col-7">
-                    <TodoList state={ state } handleTodoDelete={ handleTodoDelete } />
+                    <TodoList 
+                        state={ state } 
+                        handleTodoDelete={ handleTodoDelete } 
+                        handleTodoToggle={ handleTodoToggle }
+                    />
                 </div>
                 <div className="col-5">
                     <h4>add Todo</h4>

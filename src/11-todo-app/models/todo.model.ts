@@ -8,5 +8,5 @@ export type IinitialTodos = IinitialTodo[];
 
 export type IActionTodoReducer = {
     payload: IinitialTodo,
-    type: '[TODO] Add todo' | '[TODO] Delete todo'
+    type: '[TODO] Add todo' | '[TODO] Delete todo' | '[TODO] Toggle todo'
 }

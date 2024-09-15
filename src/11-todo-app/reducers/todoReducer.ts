@@ -12,6 +12,15 @@ const todoReducer = ( initialTodos:IinitialTodos, action: IActionTodoReducer) =>
             const findIndexTodo = todos.findIndex(todo => todo.id === id);
             todos.splice(findIndexTodo, 1); 
             return todos;
+        case '[TODO] Toggle todo':
+            const todosChecked = [...initialTodos];
+            //Set status todo
+            todosChecked.map((data)=>{
+                console.log(data);
+                data.id == action.payload.id && (data.complete = !data.complete);
+            });
+
+            return todosChecked;
         default: 
             return initialTodos;
     }
