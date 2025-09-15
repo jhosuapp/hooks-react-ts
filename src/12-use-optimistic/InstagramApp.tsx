@@ -1,4 +1,4 @@
-import { useOptimistic, useState } from 'react';
+import { useOptimistic, useState, useTransition } from 'react';
 
 interface Comment {
   id: number;
@@ -6,15 +6,20 @@ interface Comment {
   optimistic?: boolean;
 }
 
+let lastId = 2;
+
 const InstagramApp = ():React.ReactElement => {
+    const [isPending, startTransition] = useTransition();
     const [comments, setComments] = useState<Comment[]>([
         { id: 1, text: '¡Gran foto!' },
         { id: 2, text: 'Me encanta 🧡' },
     ]);
 
     const [optimistic, addOptimisticComment] = useOptimistic(comments, (currentComments, newComment: string)=>{
+        lastId++;
+
         return [...currentComments, {
-            id: new Date().getTime(),
+            id: lastId,
             text: newComment,
             optimistic: true
         }]
@@ -25,12 +30,14 @@ const InstagramApp = ():React.ReactElement => {
         
         addOptimisticComment(message);
 
-        await new Promise( ( resolve ) => setTimeout(resolve, 3000) );
-
-        setComments(prv => [...prv, {
-            id: new Date().getTime(),
-            text: message
-        }]);
+        startTransition(async ()=>{
+            await new Promise( ( resolve ) => setTimeout(resolve, 3000) );
+    
+            setComments(prv => [...prv, {
+                id: new Date().getTime(),
+                text: message
+            }]);
+        });
     };
     
     return (
@@ -76,7 +83,7 @@ const InstagramApp = ():React.ReactElement => {
                 />
                 <button
                     type="submit"
-                    disabled={false}
+                    disabled={isPending}
                     className="bg-blue-500 text-white p-2 rounded-md w-full"
                 >
                     Enviar
