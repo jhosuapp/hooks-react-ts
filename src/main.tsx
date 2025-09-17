@@ -1,4 +1,5 @@
-// import React from 'react'; 
+import React from 'react'; 
+import { Toaster } from 'sonner';
 import ReactDOM from 'react-dom/client';
 // import { TodoApp } from './11-todo-app/TodoApp';
 // import { App } from './App.tsx';
@@ -12,11 +13,13 @@ import ReactDOM from 'react-dom/client';
 // import { Memorize } from './06-memos/Memorize';
 // import { MemoHook } from './07-use-memo/MemoHook';
 // import { CallbackHook } from './08-use-callback/CallbackHook';
-import { InstagramApp } from './12-use-optimistic/InstagramApp';
+// import { InstagramApp } from './12-use-optimistic/InstagramApp';
+import { ClientInformation } from './13-use-suspense/ClientInformation';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-//   // <React.StrictMode>
-    <InstagramApp />
-//   // </React.StrictMode>,
+    <React.StrictMode>
+        <Toaster />
+        <ClientInformation />
+    </React.StrictMode>,
 )
